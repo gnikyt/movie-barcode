@@ -24,7 +24,7 @@ If you do not have these commands, [Homebrew](http://brew.sh) makes it easy to i
 *Scarface (1983)*
 `movie-barcode.sh "$HOME/Movies/Scarface (1983).mp4" 2000`
 
-![Movie Barcode of Scarface](https://raw.github.com/tyler-king/movie-barcode/branch/scarface.jpg)
+![Movie Barcode of Scarface](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/scarface.jpg)
 
 ## Output
 
