@@ -21,15 +21,17 @@ If you do not have these commands, [Homebrew](http://brew.sh) makes it easy to i
 
 ## Sample
 
-*Movie: Scarface (1983)*
+**Movie: Scarface (1983)**
+
 `movie-barcode.sh "$HOME/Movies/Scarface (1983).mp4" 2000`
 
-![Movie Barcode of Scarface](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/scarface.jpg)
+![Movie Barcode of Scarface](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/samples/scarface.jpg)
 
-*Music: DMX - I Don't Dance*
+**Music: DMX - I Don't Dance**
+
 `movie-barcode.sh "$HOME/Downloads/DMX - I Dont Dance.mp4" 2000`
 
-![Movie Barcode of DMX](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/dmx.jpg)
+![Movie Barcode of DMX](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/samples/dmx.jpg)
 
 ## Output
 
