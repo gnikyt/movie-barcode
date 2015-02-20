@@ -1,0 +1,49 @@
+#!/bin/bash
+if ! type "ffmpeg" &> /dev/null; then
+ echo "Please install ffmpeg. You can use Homebrew [http://brew.sh]"
+ exit
+fi;
+
+if ! type "convert" &> /dev/null; then
+ echo "Please install ImageMagick. You can use Homebrew [http://brew.sh]"
+ exit
+fi;
+
+MOVIE_PATH=$1
+MOVIE_FRAMES=2000
+
+if [ $2 ]; then
+  MOVIE_FRAMES=$2
+fi;
+
+echo "--- Movie Barcode Generator ---"
+echo "Movie: $(basename "$MOVIE_PATH")"
+echo "Frames: $MOVIE_FRAMES"
+
+MOVIE_DURATION=$(ffprobe -show_entries format=duration -v quiet -of csv="p=0" "$MOVIE_PATH" 2>&1)
+MOVIE_FPS=$(bc -l <<< $MOVIE_DURATION/$MOVIE_FRAMES)
+
+echo "Movie duration: $MOVIE_DURATION"
+echo "FPS extraction: 1/$MOVIE_FPS"
+echo ""
+echo "1. Extracting frames..."
+
+mkdir ./tmp &>/dev/null
+ffmpeg -i "$MOVIE_PATH" -s hd1080 -r 1/$MOVIE_FPS tmp/image-%d.jpg &>/dev/null
+
+echo "Extraction complete!"
+echo ""
+echo "2. Resizing images..."
+
+mogrify -resize 1! tmp/*.jpg &>/dev/null
+
+echo "Resizing complete!"
+echo ""
+echo "3. Creating final image..."
+
+convert tmp/*.jpg -set colorspace RGB +append barcode.jpg &>/dev/null
+mogrify -gravity center -crop "$MOVIE_FRAMES"x1000+0+0 barcode.jpg &>/dev/null
+
+echo "Movie barcode created (barcode.jpg)!"
+
+rm ./tmp/*.jpg
