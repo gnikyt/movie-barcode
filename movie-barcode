@@ -29,7 +29,7 @@ echo ""
 echo "1. Extracting frames..."
 
 mkdir ./tmp &>/dev/null
-ffmpeg -i "$MOVIE_PATH" -s hd1080 -r 1/$MOVIE_FPS tmp/image-%d.jpg &>/dev/null
+ffmpeg -i "$MOVIE_PATH" -s hd1080 -r 1/$MOVIE_FPS tmp/image-%05d.jpg &>/dev/null
 
 echo "Extraction complete!"
 echo ""
@@ -41,7 +41,7 @@ echo "Resizing complete!"
 echo ""
 echo "3. Creating final image..."
 
-convert tmp/*.jpg -set colorspace RGB +append barcode.jpg &>/dev/null
+convert `ls -c tmp/image-*.jpg` -set colorspace RGB +append barcode.jpg &>/dev/null
 mogrify -gravity center -crop "$MOVIE_FRAMES"x1000+0+0 barcode.jpg &>/dev/null
 
 echo "Movie barcode created (barcode.jpg)!"
