@@ -17,21 +17,25 @@ If you do not have these commands, [Homebrew](http://brew.sh) makes it easy to i
 
 ## Usage
 
-`movie-barcode.sh [PATH_TO_MOVIE] [FRAMES_TO_EXRACT=2000]`
+`./movie-barcode [PATH_TO_MOVIE] [FRAMES_TO_EXRACT=2000] [OUTPUT_FILENAME=$MOVIE_BASENAME]`
 
 ## Sample
 
 **Movie: Scarface (1983)**
 
-`movie-barcode.sh "$HOME/Movies/Scarface (1983).mp4" 2000`
+`./movie-barcode "$HOME/Movies/Scarface (1983).mp4" 2000`
 
 ![Movie Barcode of Scarface](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/samples/scarface.jpg)
 
+Would output a file named `Scarface_(1983).mp4.jpg` in the same directory as the movie-barcode executable.
+
 **Music: DMX - I Don't Dance**
 
-`movie-barcode.sh "$HOME/Downloads/DMX - I Dont Dance.mp4" 2000`
+`movie-barcode.sh "$HOME/Downloads/DMX - I Dont Dance.mp4" 2000 i_dont_dance.jpg`
 
 ![Movie Barcode of DMX](https://raw.githubusercontent.com/tyler-king/movie-barcode/master/samples/dmx.jpg)
+
+Would output a file named `i_dont_dance.jpg` in the same directory as the movie-barcode executable.
 
 ## Output
 
