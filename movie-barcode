@@ -16,6 +16,14 @@ if [ $2 ]; then
   MOVIE_FRAMES=$2
 fi;
 
+OUTPUT_FILENAME="$(basename $MOVIE_PATH).jpg"
+
+if [ $3 ]; then
+  OUTPUT_FILENAME=$3
+fi;
+
+OUTPUT_FILENAME="${OUTPUT_FILENAME//[[:space:]]/_}"
+
 echo "--- Movie Barcode Generator ---"
 echo "Movie: $(basename "$MOVIE_PATH")"
 echo "Frames: $MOVIE_FRAMES"
@@ -41,9 +49,9 @@ echo "Resizing complete!"
 echo ""
 echo "3. Creating final image..."
 
-convert `ls -c tmp/image-*.jpg` -set colorspace RGB +append barcode.jpg &>/dev/null
-mogrify -gravity center -crop "$MOVIE_FRAMES"x1000+0+0 barcode.jpg &>/dev/null
+convert `ls -c tmp/image-*.jpg` -set colorspace RGB +append $OUTPUT_FILENAME &>/dev/null
+mogrify -gravity center -crop "$MOVIE_FRAMES"x1000+0+0 $OUTPUT_FILENAME &>/dev/null
 
-echo "Movie barcode created (barcode.jpg)!"
+echo "Movie barcode created ($OUTPUT_FILENAME)!"
 
 rm ./tmp/*.jpg
